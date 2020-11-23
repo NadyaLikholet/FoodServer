@@ -1,8 +1,12 @@
 // Берём Express
 var express = require('express');
 
+var favicon = require('serve-favicon');
+
 // Создаём Express-приложение
 var app = express();
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Шарим статически папку, куда сборка фронта происходит
 app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
@@ -10,7 +14,8 @@ app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
 // Создаём маршрут для главной страницы
 // http://localhost:3000/
 app.get('/', function(req, res) {
-  res.sendFile('/home/nadya/Projects/jsLearning/Food_/frontend/dist/index.html');
+  res.sendFile(__dirname+'/frontend/dist/index.html');
+  ///home/nadya/Projects/jsLearning/Food_
 });
 
 // Запускаем сервер на порту 3000

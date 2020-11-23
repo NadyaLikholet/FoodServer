@@ -237,7 +237,7 @@ window.addEventListener('scroll', showModalByScroll);
             form.append(statusMessage);
 
             const request = new XMLHttpRequest();
-            request.open('POST','http://localhost:3000/server.php');
+            request.open('POST','server.php');//http://localhost:3000/
             request.setRequestHeader('Content-type','multipart/form-data');
 
             const formData = new FormData(form);
@@ -247,6 +247,7 @@ window.addEventListener('scroll', showModalByScroll);
             request.addEventListener('load',() => {
                 if (request.status === 200) {
                     console.log(request.response);
+                    console.log(formData);
                     statusMessage.textContent = message.sucsess;
                 }
                 else {
