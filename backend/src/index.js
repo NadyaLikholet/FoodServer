@@ -16,8 +16,12 @@ app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
 // Создаём маршрут для главной страницы
 // http://localhost:3000/
 app.get('/', function(req, res) {
+// HEAD
   res.sendFile(__dirname+'/frontend/dist/index.html');
   ///home/nadya/Projects/jsLearning/Food_
+//
+ // res.sendFile('../frontend/dist/index.html');
+// c657339b6459f895a7ae79df19fcd8a311a63c6a
 });
 
 // Запускаем сервер на порту 3000
