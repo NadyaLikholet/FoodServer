@@ -6,7 +6,9 @@ var favicon = require('serve-favicon');
 // Создаём Express-приложение
 var app = express();
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+console.log(__dirname);
+
+app.use(favicon(__dirname + '/node_modules/serve-favicon/node_modules/msfavicon.ico'));
 
 // Шарим статически папку, куда сборка фронта происходит
 app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));

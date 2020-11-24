@@ -242,7 +242,7 @@ window.addEventListener('scroll', showModalByScroll);
 
             const formData = new FormData(form);
 
-            request.send(FormData);
+            request.send(formData);
 
             request.addEventListener('load',() => {
                 if (request.status === 200) {
