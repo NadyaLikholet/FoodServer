@@ -5,12 +5,12 @@ var express = require('express');
 var app = express();
 
 // Шарим статически папку, куда сборка фронта происходит
-app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
+app.use(express.static('../frontend/dist'));
 
 // Создаём маршрут для главной страницы
 // http://localhost:3000/
 app.get('/', function(req, res) {
-  res.sendFile('/home/nadya/Projects/jsLearning/Food_/frontend/dist/index.html');
+  res.sendFile('../frontend/dist/index.html');
 });
 
 // Запускаем сервер на порту 3000
