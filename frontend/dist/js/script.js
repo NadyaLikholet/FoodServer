@@ -238,7 +238,7 @@ window.addEventListener('scroll', showModalByScroll);
 
             const request = new XMLHttpRequest();
             request.open('POST','server.php');//http://localhost:3000/
-            request.setRequestHeader('Content-type','multipart/form-data');
+            //request.setRequestHeader('Content-type','multipart/form-data');
 
             const formData = new FormData(form);
 
@@ -252,6 +252,8 @@ window.addEventListener('scroll', showModalByScroll);
                 }
                 else {
                     console.log(request.status);
+                    console.log(formData);
+                    console.log(request.response);
                     console.log(Error);
                     statusMessage.textContent = message.failure;
                 }
