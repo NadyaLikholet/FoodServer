@@ -3,7 +3,7 @@
 ## Folder structure
 
 ```
-backed      - Main folder for the backend
+backend     - Main folder for the backend
     src     - Main folder for the backend codes
 frontend    - Main folder for the frontend
     dist    - Thats where static files will be placed by WebPack
@@ -15,6 +15,7 @@ frontend    - Main folder for the frontend
 
 ```sh
 cd backend
+npm init
 npm install
 ```
 
