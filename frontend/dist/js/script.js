@@ -218,7 +218,7 @@ window.addEventListener('scroll', showModalByScroll);
     const forms = document.querySelectorAll('form');
 
     const message = {
-        loading: 'Загрузка',
+        loading: 'img/form/spinner.svg',
         sucsess: 'Спасибо. Мы скоро с вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
@@ -231,16 +231,21 @@ window.addEventListener('scroll', showModalByScroll);
         form.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
-            form.append(statusMessage);
+            const statusMessage = document.createElement('img');
+            //указываем путь для картинки/спиннера
+            statusMessage.src = message.loading;
+            statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
+            //вставляем новый элемент в конце формы(append - после формы)
+            form.insertAdjacentElement('afterend', statusMessage);
 
             const request = new XMLHttpRequest();
             request.open('POST','server.php');//http://localhost:3000/
-            //request.setRequestHeader('Content-type','application/json');
             //using JSON
-            request.setRequestHeader('Content-type','multipart/form-data');
+            request.setRequestHeader('Content-type','application/json; charset=utf-8');
+            //request.setRequestHeader('Content-type','multipart/form-data');
 
             const formData = new FormData(form);
 
@@ -259,18 +264,44 @@ window.addEventListener('scroll', showModalByScroll);
             request.addEventListener('load',() => {
                 if (request.status === 200) {
                     console.log(request.response);
-                    console.log(formData);
-                    statusMessage.textContent = message.sucsess;
+                    //показываем красивое опопвещение пользователю со спиннером
+                    showThanksModal(message.success);
+                    //очищаем форму
+                    statusMessage.remove();
+                    form.reset();
                 }
                 else {
                     console.log(request.status);
                     console.log(formData);
                     console.log(request.response);
                     console.log(Error);
-                    statusMessage.textContent = message.failure;
+                    showThanksModal(message.failure);
                 }
             }
             );
+
+            function showThanksModal(message) {
+                const prevModalDialog = document.querySelector('.modal__dialog');
+        
+                prevModalDialog.classList.add('hide');
+                openModal();
+        
+                const thanksModal = document.createElement('div');
+                thanksModal.classList.add('modal__dialog');
+                thanksModal.innerHTML = `
+                    <div class="modal__content">
+                        <div class="modal__close" data-close>×</div>
+                        <div class="modal__title">${message}</div>
+                    </div>
+                `;
+                document.querySelector('.modal').append(thanksModal);
+                setTimeout(() => {
+                    thanksModal.remove();
+                    prevModalDialog.classList.add('show');
+                    prevModalDialog.classList.remove('hide');
+                    closeModal();
+                }, 4000);
+            }
 
         });
 
