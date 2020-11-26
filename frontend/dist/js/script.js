@@ -219,7 +219,7 @@ window.addEventListener('scroll', showModalByScroll);
 
     const message = {
         loading: 'Загрузка',
-        sucsess: 'Спасибо. Мы скоро с вами свяжемся',
+        success: 'Спасибо. Мы скоро с вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
 
@@ -242,12 +242,12 @@ window.addEventListener('scroll', showModalByScroll);
 
             const formData = new FormData(form);
 
-            request.send(FormData);
+            request.send(formData);
 
             request.addEventListener('load',() => {
                 if (request.status === 200) {
                     console.log(request.response);
-                    statusMessage.textContent = message.sucsess;
+                    statusMessage.textContent = message.success;
                 }
                 else {
                     console.log(request.status);
