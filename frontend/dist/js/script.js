@@ -97,11 +97,10 @@ setClock('.timer', deadline);
 
 //Modal
 const ModalTrigger = document.querySelectorAll('[data-modal]'),
-      modalCloseBtn = document.querySelector('[data-close]'),
       modal = document.querySelector('.modal');
  
 ModalTrigger.forEach(item => {
-        item.addEventListener('click', OpenModal);});
+        item.addEventListener('click', openModal);});
     
     
 function CloseModal() {
@@ -111,15 +110,12 @@ function CloseModal() {
         document.body.style.overflow = '';
     }
     
-
-function OpenModal() {
+function openModal() {
     modal.classList.add('show');
     modal.classList.remove('hide');
     document.body.style.overflow = 'hidden';
     //clearInterval(setTimerId);
-}       
-
-modalCloseBtn.addEventListener('click', CloseModal);      
+}             
 
 modal.addEventListener('click',(e) =>{
     if (e.target === modal || e.target.getAttribute('data-close') == "") {
@@ -138,7 +134,7 @@ const modalTimerId = setTimeout(openModal, 300000);
 
 function showModalByScroll() {
     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-      OpenModal();  
+      openModal();  
       window.removeEventListener('scroll', showModalByScroll);
     }
 }
