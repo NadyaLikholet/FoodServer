@@ -103,7 +103,7 @@ ModalTrigger.forEach(item => {
         item.addEventListener('click', openModal);});
     
     
-function CloseModal() {
+function closeModal() {
         modal.classList.add('hide');
         modal.classList.remove('show');
         //modal.classList.toggle('show'); можно использовать вместо add и remove
@@ -119,13 +119,13 @@ function openModal() {
 
 modal.addEventListener('click',(e) =>{
     if (e.target === modal || e.target.getAttribute('data-close') == "") {
-        CloseModal();
+        closeModal();
     }
 });
 
 document.addEventListener('keydown',(e) => {
     if (e.code === "Escape" && modal.classList.contains('show')) {
-        CloseModal();
+        closeModal();
     }
 });
 
