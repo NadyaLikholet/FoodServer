@@ -213,6 +213,7 @@ window.addEventListener('scroll', showModalByScroll);
     //forms
 
     const forms = document.querySelectorAll('form');
+    console.log(forms.length);
 
     const message = {
         loading: 'img/form/spinner.svg',
@@ -225,8 +226,10 @@ window.addEventListener('scroll', showModalByScroll);
     });
 
     function postData(form){
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            console.log("submit");
 
             const statusMessage = document.createElement('img');
             //указываем путь для картинки/спиннера
@@ -247,11 +250,13 @@ window.addEventListener('scroll', showModalByScroll);
             const formData = new FormData(form);
 
             //создаем объект и помещаем в него значения элементов формы
-            // const object = {};
-            // formData.forEach(function(value,key) {
-            //     object[key] = value;
-            // });
+            const object = {};
+            formData.forEach(function(value,key) {
+                object[key] = value;
+            });
             
+            console.log(object);
+
             //преобразуем данные объекта в json формат для отправки в request
             //const json = JSON.stringify(object);
 

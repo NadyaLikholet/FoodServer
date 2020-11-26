@@ -6,7 +6,6 @@ var express = require('express');
 // Создаём Express-приложение
 var app = express();
 
-// HEAD
 console.log(__dirname);
 
 //app.use(favicon(__dirname + '/node_modules/serve-favicon/node_modules/msfavicon.ico'));
@@ -19,7 +18,6 @@ app.set('view engine', 'php');
 
 // routing all .php file to php-express
 app.all(/.+\.php$/, phpExpress.router);
-// 866fc4a1a78733866d3111090d48c5fb5025338c
 
 // Шарим статически папку, куда сборка фронта происходит
 app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
@@ -27,17 +25,13 @@ app.use(express.static('/home/nadya/Projects/jsLearning/Food_/frontend/dist'));
 // Создаём маршрут для главной страницы
 // http://localhost:3000/
 app.get('/', function(req, res) {
-// HEAD
-  res.sendFile(__dirname+'/frontend/dist/index.html');
-  ///home/nadya/Projects/jsLearning/Food_
-//
- // res.sendFile('../frontend/dist/index.html');
-// c657339b6459f895a7ae79df19fcd8a311a63c6a
+  //res.sendFile(__dirname+'/frontend/dist/index.html');
+  //home/nadya/Projects/jsLearning/Food_
   res.sendFile('index.html', {root: '../frontend/dist'});
 });
 
 //app.post('/server.php', function(req, res) {
-  //console.log(req.body);
+  console.log(req.body);
   //res.send('whatsup');
 //});
 
