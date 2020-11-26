@@ -241,22 +241,22 @@ window.addEventListener('scroll', showModalByScroll);
             const request = new XMLHttpRequest();
             request.open('POST','server.php');//http://localhost:3000/
             //using JSON
-            request.setRequestHeader('Content-type','application/json; charset=utf-8');
+            //request.setRequestHeader('Content-type','application/json; charset=utf-8');
             //request.setRequestHeader('Content-type','multipart/form-data');
 
             const formData = new FormData(form);
 
             //создаем объект и помещаем в него значения элементов формы
-            const object = {};
-            formData.forEach(function(value,key) {
-                object[key] = value;
-            });
+            // const object = {};
+            // formData.forEach(function(value,key) {
+            //     object[key] = value;
+            // });
             
             //преобразуем данные объекта в json формат для отправки в request
-            const json = JSON.stringify(object);
+            //const json = JSON.stringify(object);
 
-            //request.send(formData);
-            request.send(json);
+            request.send(formData);
+            //request.send(json);
 
             request.addEventListener('load',() => {
                 if (request.status === 200) {
