@@ -122,7 +122,7 @@ function OpenModal() {
 modalCloseBtn.addEventListener('click', CloseModal);      
 
 modal.addEventListener('click',(e) =>{
-    if (e.target === modal) {
+    if (e.target === modal || e.target.getAttribute('data-close') == "") {
         CloseModal();
     }
 });
@@ -133,7 +133,8 @@ document.addEventListener('keydown',(e) => {
     }
 });
 
-//const setTimerId = setTimeout(OpenModal,3000);
+const modalTimerId = setTimeout(openModal, 300000);
+// Увеличен таймаут, чтобы не отвлекало
 
 function showModalByScroll() {
     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
