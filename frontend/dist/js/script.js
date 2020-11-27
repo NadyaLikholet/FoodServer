@@ -216,7 +216,8 @@ window.addEventListener('scroll', showModalByScroll);
     console.log(forms.length);
 
     const message = {
-        loading: 'img/form/spinner.svg',
+        loading: 'Загрузка',
+        //'img/form/spinner.svg'
         sucsess: 'Спасибо. Мы скоро с вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
@@ -231,20 +232,24 @@ window.addEventListener('scroll', showModalByScroll);
 
             console.log("submit");
 
-            const statusMessage = document.createElement('img');
+            //const statusMessage = document.createElement('img');
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
             //указываем путь для картинки/спиннера
-            statusMessage.src = message.loading;
-            statusMessage.style.cssText = `
-                display: block;
-                margin: 0 auto;
-            `;
+            // statusMessage.src = message.loading;
+            // statusMessage.style.cssText = `
+            //     display: block;
+            //     margin: 0 auto;
+            // `;
             //вставляем новый элемент в конце формы(append - после формы)
             form.insertAdjacentElement('afterend', statusMessage);
 
             const request = new XMLHttpRequest();
-            request.open('POST','server.php');//http://localhost:3000/
+            request.open('POST','server.php');
+            //http://localhost:3000/
             //using JSON
-            //request.setRequestHeader('Content-type','application/json; charset=utf-8');
+            request.setRequestHeader('Content-type','application/json; charset=utf-8');
             //request.setRequestHeader('Content-type','multipart/form-data');
 
             const formData = new FormData(form);
@@ -258,26 +263,28 @@ window.addEventListener('scroll', showModalByScroll);
             console.log(object);
 
             //преобразуем данные объекта в json формат для отправки в request
-            //const json = JSON.stringify(object);
+            const json = JSON.stringify(object);
 
-            request.send(formData);
-            //request.send(json);
+            //request.send(formData);
+            request.send(json);
 
             request.addEventListener('load',() => {
                 if (request.status === 200) {
                     console.log(request.response);
-                    //показываем красивое опопвещение пользователю со спиннером
-                    showThanksModal(message.success);
-                    //очищаем форму
-                    statusMessage.remove();
-                    form.reset();
+                    statusMessage.textContent = message.sucsess;
+                    // //показываем красивое опопвещение пользователю со спиннером
+                    // showThanksModal(message.success);
+                    // //очищаем форму
+                    // statusMessage.remove();
+                    // form.reset();
                 }
                 else {
                     console.log(request.status);
                     console.log(formData);
                     console.log(request.response);
+                    statusMessage.textContent = message.failure;
                     console.log(Error);
-                    showThanksModal(message.failure);
+                    //showThanksModal(message.failure);
                 }
             }
             );
